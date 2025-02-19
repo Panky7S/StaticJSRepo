@@ -147,7 +147,10 @@ function InstntRemoteLogger(sdkLogsLevel) {
 
 /** Initializing Instnt Remote Logger */
 
-instnt.remoteLogger = new InstntRemoteLogger();
+instnt.initializeLogger = (sdkLogsLevel) => {
+  instnt.remoteLogger = new InstntRemoteLogger(sdkLogsLevel);
+}
+
 
 /* Binding Function at instnt scope level */
 
@@ -284,6 +287,7 @@ instnt.init = async (formKey, serviceURL, instnttxnid, idmetrics_version) => {
           event_type: 'transaction.initiated',
           event_data: { data },
         }
+        instnt.initializeLogger('DEBUG');
         instnt.emit(event);
         } else {
           instnt.remoteLogger.log(' init finished', Date())  
