@@ -259,7 +259,7 @@ instnt.initVendorCall = async () => {
 
 /** instnt.init-- Call public API to get JSON response */
 instnt.init = async (formKey, serviceURL, idmetrics_version, instnttxnid) => {
-    let url = serviceURL + '/public/transactions?sdk=react&format=json&sdk_version=' + SDK_VERSION;
+    let url = serviceURL + '/public/transactions?sdk=react&format=json';
     if (idmetrics_version && idmetrics_version.length > 0) {
         url += '&idmetrics_version=' + idmetrics_version;
     }
