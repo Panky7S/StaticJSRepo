@@ -293,3 +293,6 @@ instnt.init = async (formKey, serviceURL, idmetrics_version, instnttxnid) => {
       instnt.remoteLogger.error('error', 'Error while connecting to :', `${url}, ${error}`);
     }
 }
+
+
+instnt.init();
