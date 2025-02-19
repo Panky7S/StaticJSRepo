@@ -46,10 +46,11 @@ instnt.logRequestToServer = (messagePayload) => {
 
 /** Remote Logging With Buffer Size And Interval **/
 // Custom logger with buffer and flush interval
-function InstntRemoteLogger() {
+function InstntRemoteLogger(sdkLogsLevel) {
   this.logBuffer = [];
   this.bufferSize = 10;
   this.flushInterval = 5000; // Adjust as needed (in milliseconds)
+  this.sdkLogsLevel = sdkLogsLevel;
 
   // Function to log messages
   this.addLog = function (message) {
@@ -61,7 +62,7 @@ function InstntRemoteLogger() {
   };
 
   this.log = function (message, data) {
-    if (sdkLogsLevel === 'DEBUG') {
+    if (this.sdkLogsLevel === 'DEBUG') {
       const logPayload = {
         logLevel: 'DEBUG',
         message: message,
@@ -77,7 +78,7 @@ function InstntRemoteLogger() {
   };
 
   this.info = function (message, data) {
-    if (['INFO', 'DEBUG'].includes(sdkLogsLevel)) {
+    if (['INFO', 'DEBUG'].includes(this.sdkLogsLevel)) {
       const infoPayload = {
         logLevel: 'INFO',
         message: message,
@@ -93,7 +94,7 @@ function InstntRemoteLogger() {
   };
 
   this.warn = function (message, data) {
-    if (['WARN', 'INFO', 'DEBUG'].includes(sdkLogsLevel)) {
+    if (['WARN', 'INFO', 'DEBUG'].includes(this.sdkLogsLevel)) {
       const warnPayload = {
         logLevel: 'WARN',
         message: message,
@@ -109,7 +110,7 @@ function InstntRemoteLogger() {
   };
 
   this.error = function (message, data) {
-    if (['ERROR', 'WARN', 'INFO', 'DEBUG'].includes(sdkLogsLevel)) {
+    if (['ERROR', 'WARN', 'INFO', 'DEBUG'].includes(this.sdkLogsLevel)) {
       const errorPayload = {
         logLevel: 'ERROR',
         message: message,
@@ -258,7 +259,7 @@ instnt.initVendorCall = async () => {
 };
 
 /** instnt.init-- Call public API to get JSON response */
-instnt.init = async (formKey, serviceURL, idmetrics_version, instnttxnid) => {
+instnt.init = async (formKey, serviceURL, instnttxnid, idmetrics_version) => {
     let url = serviceURL + '/public/transactions?sdk=react&format=json';
     if (idmetrics_version && idmetrics_version.length > 0) {
         url += '&idmetrics_version=' + idmetrics_version;
