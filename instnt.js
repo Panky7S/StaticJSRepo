@@ -51,7 +51,7 @@ instnt.getEnvironmentVariable = (sdkAssetRoot) => {
 /* Console Message to backend logger */
 
 instnt.logRequestToServer = (messagePayload) => {
-  const url = serviceURL + '/public/sdklogs/';
+  const url = instnt.serviceURL + '/public/sdklogs/';
   fetch(url, {
     method: 'POST',
     headers: {
