@@ -4,6 +4,25 @@ if (!window?.instnt) {
   window.instnt = {};
 }
 
+/** Initialize variable from JSON */
+
+instnt.documentVerification = false; 
+instnt.fingerprint_txt = null;
+instnt.formKey = null;
+instnt.instnttxnid = null;
+/** aidWhitelistedDomain configure for workflow */
+instnt.aidWhitelistedDomain = "";
+/** defaultDevAidLicenseKey getting from parameter store */
+instnt.defaultDevAidLicenseKey = ""
+/* Checks needed because we are getting "true" and false as value from DB */
+instnt.isAsync = false;
+/* Checks needed because we are getting "true" and false as value from DB */
+instnt.otpVerification = false;
+instnt.userAgent = window.navigator.userAgent;
+instnt.sdkAssetRoot = null;
+instnt.invitation_url = "";
+
+
 /*  Compare Version Strings */
 instnt.compareVersionStrings = (version1, version2 = '4.9.3') => {
   const v1 = version1.split('.');
@@ -283,11 +302,17 @@ instnt.init = async (formKey, serviceURL, instnttxnid, idmetrics_version) => {
       });
       const data = await response.json();
       if (response.ok) {
+        instnt.documentVerification = data.document_verification;
+        instnt.formKey = data.form_key_id;
+        instnt.instnttxnid = data.instnttxnid;
+        instnt.otpVerification = data.otp_verification;
+        instnt.sdkAssetRoot = data.sdk_asset_root;
+        instnt.invitation_url = data.invitation_url;
         let event = {
           event_type: 'transaction.initiated',
-          event_data: { data },
+          event_data: { instnt },
         }
-        instnt.initializeLogger('DEBUG');
+        instnt.initializeLogger(data.sdk_log_level);
         instnt.emit(event);
         } else {
           instnt.remoteLogger.log(' init finished', Date())  
