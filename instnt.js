@@ -20,6 +20,7 @@ instnt.isAsync = false;
 instnt.otpVerification = false;
 instnt.userAgent = window.navigator.userAgent;
 instnt.sdkAssetRoot = null;
+instnt.serviceURL = "";
 instnt.invitation_url = "";
 
 
@@ -308,6 +309,7 @@ instnt.init = async (formKey, serviceURL, instnttxnid, idmetrics_version) => {
         instnt.otpVerification = data.otp_verification;
         instnt.sdkAssetRoot = data.sdk_asset_root;
         instnt.invitation_url = data.invitation_url;
+        instnt.serviceURL = data.backend_service_url;
         let event = {
           event_type: 'transaction.initiated',
           event_data: { instnt },
