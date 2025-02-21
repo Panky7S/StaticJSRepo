@@ -814,7 +814,7 @@ instnt.base64toBlob = (b64Data, sliceSize = 512) => {
 }
 
 /* instnt.uploadAttachment --- upload document for specific transactions */
-instnt.uploadAttachment = async (attachment, documentSide, isSelfie = false, documentType = "DRIVERS_LICENSE") => {\
+instnt.uploadAttachment = async (attachment, documentSide, isSelfie = false, documentType = "DRIVERS_LICENSE") => {
   const context = "uploading document ";
   /* getUploadUrl for document upload */
   const getUploadUrl = async (docSuffix)  => {
