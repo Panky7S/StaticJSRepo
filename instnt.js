@@ -310,6 +310,7 @@ instnt.init = async (formKey, serviceURL, instnttxnid, idmetrics_version) => {
         instnt.sdkAssetRoot = data.sdk_asset_root;
         instnt.invitation_url = data.invitation_url;
         instnt.serviceURL = data.backend_service_url;
+        instnt.isAsync = data.form?.instnt_access;
         let event = {
           event_type: 'transaction.initiated',
           event_data: { instnt },
