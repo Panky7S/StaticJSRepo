@@ -1077,7 +1077,7 @@ instnt.initImageProcessor = () => {
   window.loadIDMDeviceThresholds = () => {
     instnt.remoteLogger.log("Instnt : loadDeviceThresholds()");
     return new Promise(function (resolve, reject) {
-      resolve({{device_config}});
+      resolve("Hello Need to look ");
     });
   }
 }
