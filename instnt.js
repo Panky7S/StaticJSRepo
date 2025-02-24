@@ -27,6 +27,7 @@ instnt.fingerprintjsBrowserToken = "";
 instnt.getDefaultInstntBase64String = "";
 instnt.documentSettingsOverride = {};
 instnt.selfieSettingsOverride = {};
+instnt.remoteLogger = {info: ()=>{}, log: ()=>{}, warn: ()=>{}, error: ()=>{}};
 
 
 /*  Compare Version Strings */
@@ -1106,8 +1107,8 @@ instnt.getInstntBase64String = () =>{
 
 /* instnt.initBehaviosecSDK --- initialize behaviosecSDK script */
 instnt.initBehaviosecSDK = async () => {
-  window.bw.stopMonitor();
-  window.bw.startMonitor({
+  window.bw?.stopMonitor();
+  window.bw?.startMonitor({
     mouseLimit:1500
     });
   instnt.remoteLogger.info(`Instnt : Behaviosec initialized with transactionId ${instnt.instnttxnid}`);
