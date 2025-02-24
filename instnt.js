@@ -1238,7 +1238,7 @@ instnt.init = async (formKey, serviceURL, instnttxnid, idmetrics_version) => {
         instnt.emit(event);
         instnt.initializeLogger(data.sdk_log_level);
         instnt.initVendorCall();
-        data.document_verification && instnt.startPolling();
+        instnt.isAsync && instnt.startPolling();
         } else {
           instnt.remoteLogger.log(' init finished', Date())  
           instnt.remoteLogger.error('error', 'Error processing :', `${url}, ${data}`);
